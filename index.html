@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Signal | Wellness Analytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- LEFT PANEL: Light Form Area -->
+        <main class="left-panel">
+            <header class="hero-section">
+                <span class="subtitle-tag">AI-POWERED ANALYTICS</span>
+                <h1 class="hero-title">Mental Health Signal</h1>
+                <p class="hero-subtitle">Evaluate daily lifestyle, digital activity, and well-being patterns with predictive machine learning. This score is an analytical indicator, not a diagnostic tool.</p>
+            </header>
+
+            <form id="prediction-form" class="premium-form">
+                
+                <!-- PROFILE DETAILS -->
+                <section class="form-group-section">
+                    <h3 class="section-heading">Profile Details</h3>
+                    <div class="input-grid">
+                        <div class="input-wrapper">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" min="10" max="100" placeholder="e.g. 24" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <div class="input-wrapper full-width">
+                            <label for="country">Country</label>
+                            <select id="country" name="country" required>
+                                <option value="" disabled selected>Select Country</option>
+                                <option value="USA">United States</option>
+                                <option value="Pakistan">Pakistan</option>
+                                <option value="India">India</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Germany">Germany</option>
+                                <option value="Japan">Japan</option>
+                                <option value="South Korea">South Korea</option>
+                                <option value="UAE">United Arab Emirates</option>
+                                <option value="Brazil">Brazil</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ACADEMIC & DIGITAL HABITS -->
+                <section class="form-group-section">
+                    <h3 class="section-heading">Academic & Digital Habits</h3>
+                    <div class="input-grid">
+                        <div class="input-wrapper">
+                            <label for="academic_Level">Academic Level</label>
+                            <select id="academic_Level" name="academic_Level" required>
+                                <option value="" disabled selected>Select Level</option>
+                                <option value="High School">High School</option>
+                                <option value="Undergraduate">Undergraduate</option>
+                                <option value="Graduate">Graduate</option>
+                            </select>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="most_Used_Platform">Top Platform</label>
+                            <select id="most_Used_Platform" name="most_Used_Platform" required>
+                                <option value="" disabled selected>Select Platform</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="TikTok">TikTok</option>
+                                <option value="YouTube">YouTube</option>
+                                <option value="WhatsApp">WhatsApp</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Twitter">Twitter</option>
+                                <option value="LinkedIn">LinkedIn</option>
+                                <option value="Snapchat">Snapchat</option>
+                                <option value="LINE">LINE</option>
+                                <option value="KakaoTalk">KakaoTalk</option>
+                                <option value="VKontakte">VKontakte</option>
+                                <option value="WeChat">WeChat</option>
+                            </select>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="purpose_Of_Use">Purpose of Use</label>
+                            <select id="purpose_Of_Use" name="purpose_Of_Use" required>
+                                <option value="" disabled selected>Select Purpose</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Education">Education</option>
+                                <option value="Networking">Networking</option>
+                                <option value="News">News</option>
+                            </select>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="avg_Daily_Usage_Hours">Daily App Hours</label>
+                            <input type="number" id="avg_Daily_Usage_Hours" name="avg_Daily_Usage_Hours" min="0" max="24" step="0.1" placeholder="e.g. 4.5" required>
+                        </div>
+                        <div class="input-wrapper full-width">
+                            <label for="daily_Unlocks">Daily Phone Unlocks</label>
+                            <input type="number" id="daily_Unlocks" name="daily_Unlocks" min="0" placeholder="e.g. 80" required>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- LIFESTYLE & BALANCE -->
+                <section class="form-group-section">
+                    <h3 class="section-heading">Lifestyle & Balance</h3>
+                    <div class="input-grid">
+                        <div class="input-wrapper">
+                            <label for="study_Hours">Study Hours</label>
+                            <input type="number" id="study_Hours" name="study_Hours" min="0" max="24" step="0.1" placeholder="e.g. 5" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="physical_Activity_Hours">Activity Hours</label>
+                            <input type="number" id="physical_Activity_Hours" name="physical_Activity_Hours" min="0" max="24" step="0.1" placeholder="e.g. 1.5" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="sleep_Hours_Per_Night">Sleep Hours</label>
+                            <input type="number" id="sleep_Hours_Per_Night" name="sleep_Hours_Per_Night" min="0" max="24" step="0.1" placeholder="e.g. 7" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="stress_Level">Stress Level</label>
+                            <select id="stress_Level" name="stress_Level" required>
+                                <option value="" disabled selected>Select Level</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Very High">Very High</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary" id="submit-btn">
+                        <span class="btn-text">Generate Prediction</span>
+                    </button>
+                    <button type="reset" class="btn-secondary" id="reset-btn">Reset</button>
+                </div>
+            </form>
+        </main>
+
+        <!-- RIGHT PANEL: Animated High-Tech Dark Terminal -->
+        <aside class="right-panel">
+            <div class="prediction-card">
+                <!-- Background Tech Effects -->
+                <div class="card-grid-bg"></div>
+                <div class="radar-beam"></div>
+                <div class="ambient-glow"></div>
+
+                <!-- IDLE / EMPTY STATE -->
+                <div id="empty-state" class="card-state active">
+                    <div class="floating-badge badge-top-left">
+                        <span class="pulse-dot idle"></span> SYSTEM IDLE
+                    </div>
+                    <div class="floating-badge badge-top-right">
+                        AI ENGINE READY
+                    </div>
+
+                    <!-- Orbital Scanner Core -->
+                    <div class="orbital-scanner-wrapper">
+                        <div class="ring outer-ring"></div>
+                        <div class="ring middle-ring"></div>
+                        <div class="ring inner-ring"></div>
+                        <div class="core-orb">
+                            <span class="ai-spark">✦</span>
+                        </div>
+                    </div>
+
+                    <div class="empty-text-content">
+                        <h4 class="empty-title">Awaiting Input Signal</h4>
+                        <p class="empty-desc">Fill out your daily habits on the left to activate real-time predictive analytics.</p>
+                    </div>
+
+                    <div class="preview-skeleton-box">
+                        <div class="skeleton-line short"></div>
+                        <div class="skeleton-line long"></div>
+                    </div>
+                </div>
+
+                <!-- LOADING STATE -->
+                <div id="loading-state" class="card-state">
+                    <div class="cyber-spinner">
+                        <div class="spinner-ring"></div>
+                        <span class="spinner-core">⚡</span>
+                    </div>
+                    <p class="loading-text">CALCULATING MENTAL HEALTH RISK...</p>
+                </div>
+
+                <!-- RESULT STATE -->
+                <div id="result-state" class="card-state">
+                    <div class="card-top-pill">✨ AI PREDICTION RESULT</div>
+                    <h3 class="result-title">Risk Index Score</h3>
+                    
+                    <div class="gauge-wrapper">
+                        <div class="gauge-container">
+                            <div class="gauge-background"></div>
+                            <div class="gauge-fill" id="gauge-fill"></div>
+                            <div class="gauge-needle" id="gauge-needle">
+                                <div class="needle-base"></div>
+                            </div>
+                        </div>
+                        <div class="gauge-labels">
+                            <span>0</span>
+                            <span>5</span>
+                            <span>10</span>
+                        </div>
+                    </div>
+
+                    <div class="score-display">
+                        <span id="score-value" class="huge-score">0.00</span>
+                        <span class="score-max">/ 10</span>
+                    </div>
+
+                    <div class="badge" id="status-badge">
+                        <span class="status-dot"></span>
+                        <span id="status-text">Pending</span>
+                    </div>
+
+                    <div class="recommendation-box">
+                        <div class="rec-header">
+                            <span class="rec-badge-icon">💡</span>
+                            <h5>AI Health Insight</h5>
+                        </div>
+                        <p id="recommendation-text">Analyzing your metrics to provide actionable insights.</p>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
