@@ -55,7 +55,7 @@ def predict(data: StudentData):
     if data.country in top_countries:
         country_group = data.country
     else:
-        country_group = "Others"   
+        country_group = "Other"   
 
          
     input_row = pd.DataFrame([{
