@@ -22,46 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
         activeElement.classList.add("active");
     };
 
-    /**
-     * HEALTH SCORE EVALUATION LOGIC
-     * High Score = High Risk / High Stress / Severe Strain
-     * NOTE: rec text ab hardcoded number nahi rakhta — score dynamically append hota hai
-     */
-    const getScoreAnalysis = (score) => {
-        if (score <= 2.5) {
-            return {
-                color: "#8DEBC0",
-                bg: "rgba(16, 185, 129, 0.14)",
-                border: "rgba(141, 235, 192, 0.4)",
-                status: "Low Risk / Optimal",
-                rec: "Outstanding mental and physical balance. Your daily routines foster high resilience."
-            };
-        } else if (score <= 5.0) {
-            return {
-                color: "#5EEAD4",
-                bg: "rgba(20, 184, 166, 0.14)",
-                border: "rgba(94, 234, 212, 0.4)",
-                status: "Mild Risk / Stable",
-                rec: "Fair lifestyle routine. Take frequent offline breaks during study hours."
-            };
-        } else if (score <= 7.5) {
-            return {
-                color: "#F4C56A",
-                bg: "rgba(244, 197, 106, 0.14)",
-                border: "rgba(244, 197, 106, 0.4)",
-                status: "High Stress / Elevated Risk",
-                rec: "Elevated mental health risk detected. Take regular breaks from screen time and prioritize nightly sleep."
-            };
-        } else {
-            return {
-                color: "#F87171",
-                bg: "rgba(248, 113, 113, 0.14)",
-                border: "rgba(248, 113, 113, 0.4)",
-                status: "Critical Risk Level",
-                rec: "Urgent lifestyle recalibration needed. High digital usage and stress indicators require immediate rest."
-            };
-        }
-    };
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
