@@ -89,11 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
         switchState(loadingState);
 
         try {
-            const response = await fetch( "https://mental-health-score-predictor.vercel.app/predict", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
+           const response = await fetch("/predict", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+});
 
             if (!response.ok) throw new Error("API Error");
 
