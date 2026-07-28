@@ -1,13 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("prediction-form");
     const submitBtn = document.getElementById("submit-btn");
-    
-    // UI Card States
+
     const emptyState = document.getElementById("empty-state");
     const loadingState = document.getElementById("loading-state");
     const resultState = document.getElementById("result-state");
-    
-    // Result Card Elements
+
     const scoreValue = document.getElementById("score-value");
     const statusBadge = document.getElementById("status-badge");
     const statusDot = statusBadge.querySelector(".status-dot");
@@ -19,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let animationFrameId = null;
 
-    // Helper: State Switcher
     const switchState = (activeElement) => {
         [emptyState, loadingState, resultState].forEach(el => el.classList.remove("active"));
         activeElement.classList.add("active");
@@ -27,45 +24,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /**
      * HEALTH SCORE EVALUATION LOGIC
-     * High Score (e.g. 7.04) = High Risk / High Stress / Severe Strain
+     * High Score = High Risk / High Stress / Severe Strain
+     * NOTE: rec text ab hardcoded number nahi rakhta — score dynamically append hota hai
      */
     const getScoreAnalysis = (score) => {
         if (score <= 2.5) {
-            return { 
-                color: "#6EE7B7", 
-                bg: "rgba(5, 150, 105, 0.2)", 
-                border: "rgba(110, 231, 183, 0.5)",
-                status: "Low Risk / Optimal", 
-                rec: "Outstanding mental and physical balance! Your daily routines foster high resilience." 
+            return {
+                color: "#8DEBC0",
+                bg: "rgba(16, 185, 129, 0.14)",
+                border: "rgba(141, 235, 192, 0.4)",
+                status: "Low Risk / Optimal",
+                rec: "Outstanding mental and physical balance. Your daily routines foster high resilience."
             };
         } else if (score <= 5.0) {
-            return { 
-                color: "#34D399", 
-                bg: "rgba(16, 185, 129, 0.15)", 
-                border: "rgba(16, 185, 129, 0.4)",
-                status: "Mild Risk / Stable", 
-                rec: "Fair lifestyle routine. Take frequent offline breaks during study hours." 
+            return {
+                color: "#5EEAD4",
+                bg: "rgba(20, 184, 166, 0.14)",
+                border: "rgba(94, 234, 212, 0.4)",
+                status: "Mild Risk / Stable",
+                rec: "Fair lifestyle routine. Take frequent offline breaks during study hours."
             };
         } else if (score <= 7.5) {
-            return { 
-                color: "#FBBF24", 
-                bg: "rgba(245, 158, 11, 0.15)", 
-                border: "rgba(245, 158, 11, 0.4)",
-                status: "High Stress / Elevated Risk", 
-                rec: "Elevated mental health risk detected (7.0+ score). Take regular breaks from screen time and prioritize nightly sleep." 
+            return {
+                color: "#F4C56A",
+                bg: "rgba(244, 197, 106, 0.14)",
+                border: "rgba(244, 197, 106, 0.4)",
+                status: "High Stress / Elevated Risk",
+                rec: "Elevated mental health risk detected. Take regular breaks from screen time and prioritize nightly sleep."
             };
         } else {
-            return { 
-                color: "#FF6B6B", 
-                bg: "rgba(239, 68, 68, 0.15)", 
-                border: "rgba(239, 68, 68, 0.4)",
-                status: "Critical Risk Level", 
-                rec: "Urgent lifestyle recalibration needed. High digital usage and stress indicators require immediate rest." 
+            return {
+                color: "#F87171",
+                bg: "rgba(248, 113, 113, 0.14)",
+                border: "rgba(248, 113, 113, 0.4)",
+                status: "Critical Risk Level",
+                rec: "Urgent lifestyle recalibration needed. High digital usage and stress indicators require immediate rest."
             };
         }
     };
 
-    // Form Submission Handler
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -89,11 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
         switchState(loadingState);
 
         try {
-           const response = await fetch("/predict", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-});
+            const response = await fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
 
             if (!response.ok) throw new Error("API Error");
 
@@ -104,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (error) {
             console.error("Prediction Request Failed:", error);
-            alert("Could not fetch prediction. Please ensure your FastAPI backend is running at https://mental-health-score-predictor.vercel.app/predict");
+            alert("Could not fetch prediction. Please try again.");
             switchState(emptyState);
         } finally {
             submitBtn.disabled = false;
@@ -112,14 +109,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Reset Form
     form.addEventListener("reset", () => {
         switchState(emptyState);
     });
 
-    // Display Results with Spring Physics Animation
     const displayResults = (score) => {
-        // Reset gauge states immediately
         gaugeNeedle.style.transition = "none";
         gaugeFill.style.transition = "none";
         gaugeNeedle.style.transform = `translateX(-50%) rotate(-90deg)`;
@@ -131,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const safeScore = Math.max(0, Math.min(10, score));
         const analysis = getScoreAnalysis(safeScore);
 
-        // Update Theme Colors & Content
         statusBadge.style.backgroundColor = analysis.bg;
         statusBadge.style.color = analysis.color;
         statusBadge.style.borderColor = analysis.border;
@@ -140,41 +133,37 @@ document.addEventListener("DOMContentLoaded", () => {
         recommendationText.textContent = analysis.rec;
         recommendationBox.style.borderLeftColor = analysis.color;
 
-        // Force browser layout repaint
         void gaugeNeedle.offsetHeight;
 
-        // Spring Transitions
         gaugeNeedle.style.transition = "transform 1.4s cubic-bezier(0.34, 1.56, 0.64, 1)";
         gaugeFill.style.transition = "transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s ease";
 
         const needleRotation = (safeScore / 10) * 180 - 90;
         const fillRotation = (safeScore / 10) * 180 - 45;
 
-        // Animate
         requestAnimationFrame(() => {
             gaugeNeedle.style.transform = `translateX(-50%) rotate(${needleRotation}deg)`;
             gaugeFill.style.transform = `rotate(${fillRotation}deg)`;
             gaugeFill.style.borderTopColor = analysis.color;
             gaugeFill.style.borderRightColor = analysis.color;
-            
+
             animateValue(scoreValue, 0, safeScore, 1300);
         });
     };
 
-    // Animated Counter
     const animateValue = (obj, start, end, duration) => {
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
-        
+
         let startTimestamp = null;
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
             const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            
+
             const easeProgress = 1 - Math.pow(1 - progress, 3);
             const currentVal = easeProgress * (end - start) + start;
-            
+
             obj.innerHTML = currentVal.toFixed(2);
-            
+
             if (progress < 1) {
                 animationFrameId = window.requestAnimationFrame(step);
             }
