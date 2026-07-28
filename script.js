@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         switchState(loadingState);
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/predict", {
+            const response = await fetch( "https://mental-health-score-predictor.vercel.app/predict", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (error) {
             console.error("Prediction Request Failed:", error);
-            alert("Could not fetch prediction. Please ensure your FastAPI backend is running at http://127.0.0.1:8000");
+            alert("Could not fetch prediction. Please ensure your FastAPI backend is running at https://mental-health-score-predictor.vercel.app/predict");
             switchState(emptyState);
         } finally {
             submitBtn.disabled = false;
