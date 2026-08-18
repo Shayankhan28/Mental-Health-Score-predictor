@@ -77,6 +77,15 @@ def predict(data: StudentData):
     }])
 
     prediction = model.predict(input_row)[0]
-    return PredictionResponse(perdicted_mental_health=round(float(prediction),2))
 
-   
+    # The model predicts a WELLBEING score (higher = better mental health),
+    # trained on data ranging from ~3.6 (worst) to ~9.4 (best).
+    # The frontend UI is a "Risk Index" (higher = more risk), so we invert
+    # and rescale to a full 0-10 range using min-max scaling.
+    SCORE_MIN = 3.6   # worst wellbeing seen in training data
+    SCORE_MAX = 9.4   # best wellbeing seen in training data
+
+    risk_index = (SCORE_MAX - float(prediction)) / (SCORE_MAX - SCORE_MIN) * 10
+    risk_index = max(0.0, min(10.0, risk_index))  # clip in case of out-of-range extrapolation
+
+    return PredictionResponse(perdicted_mental_health=round(risk_index, 2))
