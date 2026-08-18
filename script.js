@@ -27,23 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
      * Light theme risk colors
      */
     const getScoreAnalysis = (score) => {
+        // NOTE: Mental_Health_Score is a WELLBEING score (higher = better),
+        // not a risk score. Training data range is ~3.6 to ~9.4.
+        // So LOW score => high risk, HIGH score => optimal. Bands below
+        // are reversed vs. the original (buggy) version.
         if (score <= 2.5) {
             return {
-                color: "#2F9E63",
-                bg: "rgba(47, 158, 99, 0.12)",
-                border: "rgba(47, 158, 99, 0.35)",
-                status: "Low Risk / Optimal",
-                rec: "Outstanding mental and physical balance. Your daily routines foster high resilience."
+                color: "#D64545",
+                bg: "rgba(214, 69, 69, 0.12)",
+                border: "rgba(214, 69, 69, 0.35)",
+                status: "Critical Risk Level",
+                rec: "Urgent lifestyle recalibration needed. High digital usage and stress indicators require immediate rest."
             };
         } else if (score <= 5.0) {
-            return {
-                color: "#2A9D8F",
-                bg: "rgba(42, 157, 143, 0.12)",
-                border: "rgba(42, 157, 143, 0.35)",
-                status: "Mild Risk / Stable",
-                rec: "Fair lifestyle routine. Take frequent offline breaks during study hours."
-            };
-        } else if (score <= 7.5) {
             return {
                 color: "#C9821F",
                 bg: "rgba(201, 130, 31, 0.12)",
@@ -51,13 +47,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 status: "High Stress / Elevated Risk",
                 rec: "Elevated mental health risk detected. Take regular breaks from screen time and prioritize nightly sleep."
             };
+        } else if (score <= 7.5) {
+            return {
+                color: "#2A9D8F",
+                bg: "rgba(42, 157, 143, 0.12)",
+                border: "rgba(42, 157, 143, 0.35)",
+                status: "Mild Risk / Stable",
+                rec: "Fair lifestyle routine. Take frequent offline breaks during study hours."
+            };
         } else {
             return {
-                color: "#D64545",
-                bg: "rgba(214, 69, 69, 0.12)",
-                border: "rgba(214, 69, 69, 0.35)",
-                status: "Critical Risk Level",
-                rec: "Urgent lifestyle recalibration needed. High digital usage and stress indicators require immediate rest."
+                color: "#2F9E63",
+                bg: "rgba(47, 158, 99, 0.12)",
+                border: "rgba(47, 158, 99, 0.35)",
+                status: "Low Risk / Optimal",
+                rec: "Outstanding mental and physical balance. Your daily routines foster high resilience."
             };
         }
     };
